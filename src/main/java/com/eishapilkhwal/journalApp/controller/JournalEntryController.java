@@ -17,9 +17,24 @@ public class JournalEntryController {
     }
 
     @PostMapping
-    public void createEntry(@RequestBody JournalEntry myEntry){
+    public boolean createEntry(@RequestBody JournalEntry myEntry){
         journalEntries.put(myEntry.getId(), myEntry);
         return true;
+    }
+
+    @GetMapping("id/{myId}")
+    public JournalEntry getJournalEntryByID(@PathVariable Long myId){
+        return journalEntries.get(myId);
+    }
+
+    @DeleteMapping("id/{myId}")
+    public JournalEntry deleteJournalEntryByID(@PathVariable Long myId){
+        return journalEntries.remove(myId);
+    }
+
+    @PutMapping("/id/{id}")
+    public JournalEntry updateJournalEntryByID(@PathVariable Long id, @RequestBody JournalEntry myEntry){
+        return journalEntries.put(id, myEntry);
     }
 }
 
